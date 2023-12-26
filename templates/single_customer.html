@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <h1>List of Customers</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Customer's ID</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Country</th>
+                <th>Modify</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ customers.idCustomers }}</td>
+                <td>{{ customers.last_name }}</td>
+                <td>{{ customers..first_name }}</td>
+                <td>{{ customers.email }}</td>
+                <td>{{ customers.phonenumber }}</td>
+                <td>{{ customers.country }}</td>
+                <td>
+                    <a href="/edit/{{ customers.idCustomers }}">Edit</a> |
+                    <a href="/delete/{{ customers.idCustomers }}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/add">Add New Customer</a><br><br>
+    <a href="/">Back to Home Page</a>
+</body>
+</html>
