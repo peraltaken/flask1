@@ -30,7 +30,7 @@ def home_page():
 @app.route("/customers", methods=["GET"])
 def show_clients():
     customers_data = data_fetch("""select * from customers""")
-    return render_template('customer.html', customers=customers_data)
+    return render_template('customers.html', customers=customers_data)
 
 @app.route("/add")
 def add_client():
@@ -47,26 +47,27 @@ def submit():
 
 
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO customers (last_name, first_name, email, phonenumber, country) VALUES (%s, %s, %s, %s, %s)", (last_name, first_name, email, phonenumber, country))
+        cur.execute("INSERT INTO customers (idCustomers, last_name, first_name, email, phonenumber, country) VALUES (%s, %s, %s, %s, %s)", (last_name, first_name, email, phonenumber, country))
         mysql.connection.commit()
         cur.close()
         
         return redirect(url_for('show_customers'))
 
 
-@app.route("/edit/<int:customers_id>", methods=["GET", "POST"])
+@app.route("/edit/<int:idCustomers>", methods=["GET", "POST"])
 def edit_customer(idCustomers):
     cur = mysql.connection.cursor()
     
     if request.method == "POST":
-        new_last_name = request.form["new_last_name"]
-        new_first_name = request.form["new_first_name"]
-        new_email = request.form["new_email"]
-        new_phonenumber = request.form["new_phonenumber"]
-        new_country = request.form["new_country"]
+        last_name = request.form["last_name"]
+        first_name = request.form["first_name"]
+        email = request.form["email"]
+        phonenumber = request.form["phonenumber"]
+        country = request.form["country"]
+        idCustomers =request.form["idCustomers"]
         
         cur.execute("""
-            UPDATE clients 
+            UPDATE customers 
             SET 
                 last_name = %s, 
                 first_name = %s, 
@@ -76,17 +77,17 @@ def edit_customer(idCustomers):
             WHERE 
                 idCustomers = %s
         """, (
-            new_last_name,
-            new_first_name,
-            new_email,
-            new_phonenumber,
-            new_country,
+            last_name,
+            first_name,
+            email,
+            phonenumber,
+            country,
             idCustomers
         ))
         mysql.connection.commit()
         cur.close()
         
-        return redirect(url_for('show_customers'))
+        return redirect(url_for('show_single_customer'))
     
     # Fetch existing client details to pre-fill the edit form
     cur.execute("SELECT * FROM customers WHERE idCustomers = %s", (idCustomers,))

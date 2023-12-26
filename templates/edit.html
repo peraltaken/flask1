@@ -2,24 +2,76 @@
 <html>
 <head>
     <title>Edit Customer Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <h1>Edit Customer Details</h1>
-    <form method="post" action="/edit/{{ customers.idCustomers }}">
-        <label for="new_last_name">Last Name:</label>
-        <input type="text" id="new_last_name" name="new_last_name" value="{{ customers.last_name }}"><br><br>
+    <form method="post" action="/edit/{{ customer.idCustomers }}">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ customer.last_name }}"><br><br>
         
-        <label for="new_first_name">First Name:</label>
-        <input type="text" id="new_first_name" name="new_first_name" value="{{ customers.first_name }}"><br><br>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ customer.first_name }}"><br><br>
         
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{ customers.email }}"><br><br>
+        <input type="email" id="email" name="email" value="{{ customer.email }}"><br><br>
         
         <label for="phonenumber">Phone Number:</label>
-        <input type="date" id="phonenumber" name="phonenumber" value="{{ customers.phonenumber }}"><br><br>
+        <input type="text" id="phonenumber" name="phonenumber" value="{{ customer.phonenumber }}"><br><br>
         
         <label for="country">Country:</label>
-        <input type="text" id="country" name="country" value="{{ customers.country }}"><br><br>
+        <input type="text" id="country" name="country" value="{{ customer.country }}"><br><br>
         
         <input type="submit" value="Save Changes">
     </form>
